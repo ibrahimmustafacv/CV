@@ -1,0 +1,228 @@
+/* Print Styles for CV Templates */
+
+@media print {
+    /* Reset print styles */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Hide non-printable elements */
+    .header,
+    .progress-container,
+    .navigation-container,
+    .template-selection,
+    .preview-actions,
+    .btn-nav,
+    .btn-primary,
+    .btn-secondary,
+    .loading-overlay {
+        display: none !important;
+    }
+    
+    /* Page setup */
+    @page {
+        size: A4;
+        margin: 0.5in;
+    }
+    
+    html, body {
+        background: white !important;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    /* CV Template Print Adjustments */
+    .cv-template {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-inside: avoid;
+    }
+    
+    /* Modern Template Print */
+    .cv-template.modern {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+    }
+    
+    .modern .cv-header {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        page-break-after: avoid;
+    }
+    
+    .modern .cv-content {
+        display: grid !important;
+        grid-template-columns: 1fr 2fr !important;
+        gap: 0 !important;
+    }
+    
+    .modern .cv-sidebar {
+        background: rgba(255, 255, 255, 0.05) !important;
+    }
+    
+    .modern .cv-main {
+        background: white !important;
+        color: #333 !important;
+    }
+    
+    /* Simple Template Print */
+    .cv-template.simple {
+        background: white !important;
+        color: #333 !important;
+    }
+    
+    .simple .cv-header {
+        border-bottom: 3px solid #2c3e50 !important;
+        page-break-after: avoid;
+    }
+    
+    /* Classic Template Print */
+    .cv-template.classic {
+        background: white !important;
+        color: #333 !important;
+    }
+    
+    .classic .cv-header {
+        background: #f8f9fa !important;
+        border-bottom: 4px solid #8b4513 !important;
+        page-break-after: avoid;
+    }
+    
+    /* Section print adjustments */
+    .cv-section {
+        page-break-inside: avoid;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .cv-section h2 {
+        page-break-after: avoid;
+    }
+    
+    .cv-item {
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Photo adjustments for print */
+    .cv-photo {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Skills list print */
+    .cv-skills-list {
+        page-break-inside: avoid;
+    }
+    
+    .cv-skill-item {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* Contact information */
+    .cv-contact {
+        page-break-inside: avoid;
+    }
+    
+    /* Font size adjustments for print */
+    .cv-name {
+        font-size: 24pt !important;
+    }
+    
+    .cv-title {
+        font-size: 14pt !important;
+    }
+    
+    .cv-section h2 {
+        font-size: 16pt !important;
+    }
+    
+    .cv-section h3 {
+        font-size: 12pt !important;
+    }
+    
+    .cv-contact-item,
+    .cv-description,
+    .cv-date {
+        font-size: 10pt !important;
+    }
+    
+    /* Ensure proper spacing */
+    .cv-header {
+        margin-bottom: 1rem !important;
+    }
+    
+    .cv-content {
+        margin-top: 0 !important;
+    }
+    
+    /* Links should be visible when printed */
+    a {
+        text-decoration: underline !important;
+        color: inherit !important;
+    }
+    
+    /* Prevent orphaned headers */
+    h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+    
+    /* Keep related content together */
+    .cv-item h3 + .cv-company,
+    .cv-item h3 + .cv-institution {
+        page-break-before: avoid;
+    }
+    
+    /* Achievements list */
+    .cv-achievements {
+        page-break-inside: avoid;
+    }
+    
+    .cv-achievements li {
+        page-break-inside: avoid;
+    }
+    
+    /* Language items */
+    .cv-language-item {
+        page-break-inside: avoid;
+    }
+    
+    /* Responsive print layout for mobile */
+    @media print and (max-width: 768px) {
+        .modern .cv-content {
+            grid-template-columns: 1fr !important;
+        }
+        
+        .modern .cv-sidebar {
+            order: 2;
+        }
+        
+        .classic .cv-header-content {
+            flex-direction: column !important;
+        }
+        
+        .classic .cv-contact {
+            grid-template-columns: 1fr !important;
+        }
+    }
+}
+
+/* Print preview adjustments */
+.print-preview {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.print-preview .cv-template {
+    width: 100%;
+    height: 100%;
+}

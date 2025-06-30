@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد السيرة الذاتية - إنشاء سيرة ذاتية احترافية</title>
+    
+    <!-- Google Fonts for Arabic -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/templates.css">
+    <link rel="stylesheet" href="styles/print.css" media="print">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="header-buttons">
+                    <a href="https://ibrahimmustafacv.github.io/" target="_blank" class="btn-header btn-portfolio">
+                        <i class="fas fa-rocket animated-icon"></i>
+                        المشاريع
+                    </a>
+                    <a href="https://ibrahimmustafacv.github.io/my-social-media-page/" target="_blank" class="btn-header btn-social">
+                        <i class="fas fa-share-alt animated-icon"></i>
+                        تابعنا
+                    </a>
+                </div>
+            </div>
+            <h1><i class="fas fa-file-alt"></i> مولد السيرة الذاتية</h1>
+            <p>إنشاء سيرة ذاتية احترافية في دقائق</p>
+        </div>
+    </header>
+
+    <!-- Main Application -->
+    <main class="main-content">
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">المعلومات الشخصية</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">الهدف الوظيفي</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">الخبرات</span>
+                </div>
+                <div class="step" data-step="4">
+                    <span class="step-number">4</span>
+                    <span class="step-label">التعليم</span>
+                </div>
+                <div class="step" data-step="5">
+                    <span class="step-number">5</span>
+                    <span class="step-label">المهارات</span>
+                </div>
+                <div class="step" data-step="6">
+                    <span class="step-number">6</span>
+                    <span class="step-label">المعاينة</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container" id="formContainer">
+            <!-- Step 1: Personal Information -->
+            <div class="form-step active" id="step1">
+                <div class="container">
+                    <h2><i class="fas fa-user"></i> المعلومات الشخصية</h2>
+                    
+                    <div class="photo-upload-section">
+                        <div class="photo-preview" id="photoPreview">
+                            <i class="fas fa-camera"></i>
+                            <span>اضغط لإضافة صورة</span>
+                        </div>
+                        <input type="file" id="profilePhoto" accept="image/*" style="display: none;">
+                        <button type="button" class="btn-secondary" onclick="document.getElementById('profilePhoto').click();">
+                            <i class="fas fa-upload"></i> رفع صورة شخصية
+                        </button>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">الاسم الكامل *</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني *</label>
+                            <input type="email" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف *</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">العنوان</label>
+                            <input type="text" id="address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="url" id="linkedin" placeholder="https://linkedin.com/in/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="github">GitHub</label>
+                            <input type="url" id="github" placeholder="https://github.com/username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website">موقع شخصي</label>
+                            <input type="url" id="website" placeholder="https://your-website.com">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Career Objective -->
+            <div class="form-step" id="step2">
+                <div class="container">
+                    <h2><i class="fas fa-bullseye"></i> الهدف الوظيفي والملخص الشخصي</h2>
+                    
+                    <div class="form-group">
+                        <label for="jobTitle">المسمى الوظيفي المطلوب *</label>
+                        <input type="text" id="jobTitle" required placeholder="مثال: مطور ويب، مصمم جرافيك، محاسب">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="careerObjective">هدفك المهني *</label>
+                        <textarea id="careerObjective" rows="4" required placeholder="اكتب هدفك المهني وطموحاتك الوظيفية..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="personalSummary">الملخص الشخصي *</label>
+                        <textarea id="personalSummary" rows="5" required placeholder="اكتب ملخصاً عن خبراتك ومهاراتك وما يميزك..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Work Experience -->
+            <div class="form-step" id="step3">
+                <div class="container">
+                    <h2><i class="fas fa-briefcase"></i> الخبرات العملية والمشاريع</h2>
+                    
+                    <div class="dynamic-section" id="experienceSection">
+                        <div class="experience-item" data-index="0">
+                            <div class="section-header">
+                                <h3>الخبرة الأولى</h3>
+                                <button type="button" class="btn-remove" onclick="removeExperience(0)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>المسمى الوظيفي</label>
+                                    <input type="text" name="experience[0][position]">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>اسم الشركة/المؤسسة</label>
+                                    <input type="text" name="experience[0][company]">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>تاريخ البداية</label>
+                                    <input type="month" name="experience[0][startDate]">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>تاريخ النهاية</label>
+                                    <input type="month" name="experience[0][endDate]">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="experience[0][current]">
+                                        <span>أعمل حالياً</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>وصف المهام والإنجازات</label>
+                                <textarea name="experience[0][description]" rows="4" placeholder="اكتب وصفاً مفصلاً عن مهامك وإنجازاتك..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-add" onclick="addExperience()">
+                        <i class="fas fa-plus"></i> إضافة خبرة أخرى
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Education -->
+            <div class="form-step" id="step4">
+                <div class="container">
+                    <h2><i class="fas fa-graduation-cap"></i> المؤهلات التعليمية والشهادات</h2>
+                    
+                    <!-- Education Section -->
+                    <h3>التعليم</h3>
+                    <div class="dynamic-section" id="educationSection">
+                        <div class="education-item" data-index="0">
+                            <div class="section-header">
+                                <h4>المؤهل الأول</h4>
+                                <button type="button" class="btn-remove" onclick="removeEducation(0)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>الدرجة العلمية</label>
+                                    <select name="education[0][degree]">
+                                        <option value="">اختر الدرجة</option>
+                                        <option value="دبلوم">دبلوم</option>
+                                        <option value="بكالوريوس">بكالوريوس</option>
+                                        <option value="ماجستير">ماجستير</option>
+                                        <option value="دكتوراه">دكتوراه</option>
+                                        <option value="أخرى">أخرى</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>التخصص</label>
+                                    <input type="text" name="education[0][major]">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>الجامعة/المعهد</label>
+                                    <input type="text" name="education[0][institution]">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>سنة التخرج</label>
+                                    <input type="number" name="education[0][graduationYear]" min="1980" max="2030">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>المعدل (اختياري)</label>
+                                    <input type="text" name="education[0][gpa]" placeholder="مثال: 3.8/4.0 أو ممتاز">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-add" onclick="addEducation()">
+                        <i class="fas fa-plus"></i> إضافة مؤهل آخر
+                    </button>
+
+                    <!-- Certifications Section -->
+                    <h3>الشهادات والدورات</h3>
+                    <div class="dynamic-section" id="certificationsSection">
+                        <div class="certification-item" data-index="0">
+                            <div class="section-header">
+                                <h4>الشهادة الأولى</h4>
+                                <button type="button" class="btn-remove" onclick="removeCertification(0)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>اسم الشهادة/الدورة</label>
+                                    <input type="text" name="certifications[0][name]">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>الجهة المانحة</label>
+                                    <input type="text" name="certifications[0][issuer]">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>تاريخ الحصول عليها</label>
+                                    <input type="month" name="certifications[0][date]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-add" onclick="addCertification()">
+                        <i class="fas fa-plus"></i> إضافة شهادة أخرى
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 5: Skills and Languages -->
+            <div class="form-step" id="step5">
+                <div class="container">
+                    <h2><i class="fas fa-cogs"></i> المهارات واللغات</h2>
+                    
+                    <!-- Technical Skills -->
+                    <h3>المهارات التقنية</h3>
+                    <div class="skills-container" id="technicalSkills">
+                        <div class="skill-input-group">
+                            <input type="text" placeholder="اكتب مهارة تقنية واضغط Enter" id="technicalSkillInput">
+                            <button type="button" onclick="addSkill('technical')">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="skills-tags" id="technicalSkillsTags"></div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <h3>المهارات الشخصية</h3>
+                    <div class="skills-container" id="softSkills">
+                        <div class="skill-input-group">
+                            <input type="text" placeholder="اكتب مهارة شخصية واضغط Enter" id="softSkillInput">
+                            <button type="button" onclick="addSkill('soft')">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="skills-tags" id="softSkillsTags"></div>
+                    </div>
+
+                    <!-- Languages -->
+                    <h3>اللغات</h3>
+                    <div class="dynamic-section" id="languagesSection">
+                        <div class="language-item" data-index="0">
+                            <div class="section-header">
+                                <h4>اللغة الأولى</h4>
+                                <button type="button" class="btn-remove" onclick="removeLanguage(0)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>اللغة</label>
+                                    <input type="text" name="languages[0][language]" placeholder="مثال: العربية، الإنجليزية">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>مستوى الإجادة</label>
+                                    <select name="languages[0][proficiency]">
+                                        <option value="">اختر المستوى</option>
+                                        <option value="أساسي">أساسي</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="متقدم">متقدم</option>
+                                        <option value="لغة أم">لغة أم</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-add" onclick="addLanguage()">
+                        <i class="fas fa-plus"></i> إضافة لغة أخرى
+                    </button>
+
+                    <!-- Achievements -->
+                    <h3>الإنجازات والجوائز</h3>
+                    <div class="form-group">
+                        <label for="achievements">اكتب إنجازاتك وجوائزك (كل إنجاز في سطر منفصل)</label>
+                        <textarea id="achievements" rows="5" placeholder="- حصلت على جائزة أفضل موظف 2023&#10;- شاركت في مشروع تطوير نظام إدارة المبيعات&#10;- نشرت 3 مقالات تقنية على LinkedIn"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Preview and Templates -->
+            <div class="form-step" id="step6">
+                <div class="container">
+                    <h2><i class="fas fa-eye"></i> اختيار القالب والمعاينة</h2>
+                    
+                    <!-- Template Selection -->
+                    <div class="template-selection">
+                        <h3>اختر قالب السيرة الذاتية</h3>
+                        <p class="template-description">قوالب احترافية عالية الجودة مصممة خصيصاً للحصول على أفضل انطباع</p>
+                        <div class="templates-grid">
+                            <div class="template-option active" data-template="modern">
+                                <div class="template-preview">
+                                    <div class="template-thumb modern-thumb">
+                                        <div class="thumb-header">
+                                            <div class="thumb-circle gold"></div>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <div class="thumb-line long gradient"></div>
+                                            <div class="thumb-line medium gradient"></div>
+                                            <div class="thumb-line short gradient"></div>
+                                        </div>
+                                        <div class="thumb-sidebar">
+                                            <div class="thumb-line short white"></div>
+                                            <div class="thumb-line medium white"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>تنفيذي مودرن</h4>
+                                <p>تصميم عصري مع تدرجات لونية احترافية</p>
+                            </div>
+                            
+                            <div class="template-option" data-template="simple">
+                                <div class="template-preview">
+                                    <div class="template-thumb simple-thumb">
+                                        <div class="thumb-header">
+                                            <div class="thumb-circle blue"></div>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <div class="thumb-section">
+                                                <div class="thumb-line long blue"></div>
+                                                <div class="thumb-line medium"></div>
+                                                <div class="thumb-line short"></div>
+                                            </div>
+                                            <div class="thumb-section">
+                                                <div class="thumb-line medium blue"></div>
+                                                <div class="thumb-line long"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>أنيق ونظيف</h4>
+                                <p>تصميم بسيط وواضح مع تأثيرات حديثة</p>
+                            </div>
+                            
+                            <div class="template-option" data-template="classic">
+                                <div class="template-preview">
+                                    <div class="template-thumb classic-thumb">
+                                        <div class="thumb-header">
+                                            <div class="thumb-circle gold-classic"></div>
+                                            <div class="thumb-info">
+                                                <div class="thumb-line medium brown"></div>
+                                                <div class="thumb-line short gold"></div>
+                                            </div>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <div class="thumb-section luxury">
+                                                <div class="thumb-line long brown"></div>
+                                                <div class="thumb-line medium"></div>
+                                                <div class="thumb-line short gold"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>فاخر كلاسيكي</h4>
+                                <p>تصميم راقي مع عناصر ذهبية فاخرة</p>
+                            </div>
+                            
+                            <div class="template-option" data-template="sidebar">
+                                <div class="template-preview">
+                                    <div class="template-thumb sidebar-thumb">
+                                        <div class="thumb-sidebar-section">
+                                            <div class="thumb-circle white"></div>
+                                            <div class="thumb-line short white"></div>
+                                            <div class="thumb-line medium white"></div>
+                                        </div>
+                                        <div class="thumb-main-section">
+                                            <div class="thumb-header-info">
+                                                <div class="thumb-line long dark"></div>
+                                                <div class="thumb-line medium blue"></div>
+                                            </div>
+                                            <div class="thumb-content-sections">
+                                                <div class="thumb-line medium dark"></div>
+                                                <div class="thumb-line short dark"></div>
+                                                <div class="thumb-line long dark"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>شريط جانبي</h4>
+                                <p>تصميم عملي مع شريط جانبي منظم</p>
+                            </div>
+                            
+                            <div class="template-option" data-template="minimal">
+                                <div class="template-preview">
+                                    <div class="template-thumb minimal-thumb">
+                                        <div class="thumb-header-minimal">
+                                            <div class="thumb-line long dark"></div>
+                                            <div class="thumb-line medium gray"></div>
+                                            <div class="thumb-contact-line"></div>
+                                        </div>
+                                        <div class="thumb-content-minimal">
+                                            <div class="thumb-section-minimal">
+                                                <div class="thumb-line short dark"></div>
+                                                <div class="thumb-line long gray"></div>
+                                            </div>
+                                            <div class="thumb-section-minimal">
+                                                <div class="thumb-line short dark"></div>
+                                                <div class="thumb-line medium gray"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>مينيمال بسيط</h4>
+                                <p>تصميم بسيط ومركز للمحتوى</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CV Preview -->
+                    <div class="cv-preview-container">
+                        <div class="preview-actions">
+                            <button type="button" class="btn-secondary" onclick="editCV()">
+                                <i class="fas fa-edit"></i> تعديل البيانات
+                            </button>
+                            <button type="button" class="btn-primary" onclick="printCV()">
+                                <i class="fas fa-print"></i> طباعة
+                            </button>
+                            <button type="button" class="btn-primary" onclick="downloadPDF()">
+                                <i class="fas fa-download"></i> تحميل PDF
+                            </button>
+                        </div>
+                        
+                        <div class="cv-preview" id="cvPreview">
+                            <!-- CV content will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-container" id="navigationContainer">
+            <div class="container">
+                <button type="button" class="btn-nav btn-prev" id="prevBtn" onclick="previousStep()">
+                    <i class="fas fa-arrow-right"></i> السابق
+                </button>
+                <button type="button" class="btn-nav btn-next" id="nextBtn" onclick="nextStep()">
+                    التالي <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Links -->
+    <footer class="footer-links">
+        <div class="container">
+            <div class="footer-buttons">
+                <a href="https://ibrahimmustafacv.github.io/" target="_blank" class="btn-footer btn-portfolio">
+                    <i class="fas fa-folder-open"></i>
+                    للمزيد من المشاريع
+                </a>
+                <a href="https://ibrahimmustafacv.github.io/my-social-media-page/" target="_blank" class="btn-footer btn-social">
+                    <i class="fas fa-users"></i>
+                    تابعنا هنا
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>جاري إنشاء السيرة الذاتية...</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/formHandler.js"></script>
+    <script src="js/templateRenderer.js"></script>
+    <script src="js/pdfGenerator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
